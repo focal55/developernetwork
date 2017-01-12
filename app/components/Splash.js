@@ -14,7 +14,7 @@ class Splash extends Component {
 				</Image>
 			</View>
 		)
-	}
+	};
 }
 
 const styles = {

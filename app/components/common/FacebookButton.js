@@ -25,20 +25,19 @@ const styles = {
   container: {
     padding: 5,
     backgroundColor: '#3C5193',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexDirection: 'row',
-    position: 'relative'
+    position: 'relative',
+    marginTop: 40
   },
   button: {
-    flex: 1,
-    alignSelf: 'stretch',
     backgroundColor: '#3C5193',
-    borderRadius: 5,
+    borderRadius: 15,
     marginLeft: 5,
     marginRight: 5
   },
   facebookIcon: {
-    marginRight: 15,
+    padding: 15,
 		fontSize: 24,
   },
   text: {
@@ -46,8 +45,6 @@ const styles = {
     color: '#ffffff',
     fontSize: 18,
     fontWeight: '300',
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginLeft: 50,
+    padding: 25
   }
 };
