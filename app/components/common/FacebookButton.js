@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Text,
-  TouchableOpacity,
+	TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -12,10 +12,12 @@ export const FacebookButton = (props) => {
       <TouchableOpacity
         style={styles.button}
         onPress={props.onPress}>
-        <Text style={styles.text}>
-          <Icon style={styles.facebookIcon} name='facebook' />
-          <Text>Sign in with Facebook</Text>
-        </Text>
+        <View style={styles.buttonInner}>
+          <View style={styles.facebookIconWrapper}>
+						<Icon style={styles.facebookIcon} name='facebook' />
+					</View>
+          <Text style={styles.facebookText}>Sign in with Facebook</Text>
+        </View>
       </TouchableOpacity>
     </View>
   )
@@ -24,27 +26,33 @@ export const FacebookButton = (props) => {
 const styles = {
   container: {
     padding: 5,
-    backgroundColor: '#3C5193',
     justifyContent: 'center',
     flexDirection: 'row',
-    position: 'relative',
-    marginTop: 40
+		backgroundColor: '#3C5193',
+		borderRadius: 5
   },
   button: {
     backgroundColor: '#3C5193',
-    borderRadius: 15,
-    marginLeft: 5,
-    marginRight: 5
+		flexDirection: 'row',
+		justifyContent: 'space-around'
   },
-  facebookIcon: {
-    padding: 15,
+	buttonInner: {
+  	flexDirection: 'row',
+		paddingTop: 7,
+		paddingBottom: 7,
+		paddingLeft: 12,
+		paddingRight: 12
+	},
+	facebookIconWrapper: {
+  	paddingRight: 10
+	},
+	facebookIcon: {
 		fontSize: 24,
-  },
-  text: {
-    alignSelf: 'center',
-    color: '#ffffff',
-    fontSize: 18,
-    fontWeight: '300',
-    padding: 25
-  }
+		color: '#ffffff'
+	},
+	facebookText: {
+  	color: '#ffffff',
+		fontSize: 18,
+		paddingTop: 2
+	},
 };
