@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { setLoginType } from '../../actions/LoginTypeAction';
 import { FacebookButton}  from '../common/FacebookButton';

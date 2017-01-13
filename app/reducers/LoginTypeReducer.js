@@ -1,7 +1,7 @@
 import { SWITCH_LOGIN_TYPE } from '../actions/types';
 
 const INITIAL_STATE = {
-	loginType: 'standard'
+	loginType: 'facebook'
 };
 
 export default (state = INITIAL_STATE, action) => {
