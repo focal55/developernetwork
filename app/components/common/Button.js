@@ -22,25 +22,23 @@ export const Button = (props) => {
 const styles = {
   container: {
     padding: 5,
-    backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    position: 'relative'
   },
   button: {
     flex: 1,
     alignSelf: 'stretch',
-    backgroundColor: '#fff',
+    backgroundColor: '#3C5193',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#007aff',
+    borderColor: '#3C5193',
     marginLeft: 5,
     marginRight: 5
   },
   text: {
     alignSelf: 'center',
-    color: '#007aff',
-    fontSize: 10,
+    color: '#fff',
+    fontSize: 18,
     fontWeight: '600',
     paddingTop: 5,
     paddingBottom: 5

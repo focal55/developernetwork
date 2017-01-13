@@ -45,7 +45,7 @@ const styles = {
 		marginTop: 90
 	},
 	LoginLink: {
-		marginTop: 50
+		marginTop: 15
 	},
 	LoginLinkText: {
 		color: '#ffffff',

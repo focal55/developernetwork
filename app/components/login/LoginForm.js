@@ -30,7 +30,7 @@ class LoginForm extends Component {
 		}
 
 		return (
-			<Button onPress={this.onButtonPress.bind(this)}>
+			<Button onPress={this.onButtonPress.bind(this)} style={styles.loginButton}>
 				Login
 			</Button>
 		);
@@ -47,29 +47,29 @@ class LoginForm extends Component {
 					/>
 				</View>
 
-				{/*<CardSection>*/}
-					{/*<Input*/}
-						{/*secureTextEntry*/}
-						{/*label="Password"*/}
-						{/*placeholder="password"*/}
-						{/*onChangeText={this.onPasswordChange.bind(this)}*/}
-						{/*value={this.props.password}*/}
-					{/*/>*/}
-				{/*</CardSection>*/}
+				<View style={styles.formSection}>
+					<Input
+						secureTextEntry
+						label="Password"
+						placeholder="password"
+						onChangeText={this.onPasswordChange.bind(this)}
+						value={this.props.password}
+					/>
+				</View>
 
-				{/*<Text style={styles.errorTextStyle}>*/}
-					{/*{this.props.error}*/}
-				{/*</Text>*/}
+				<Text style={styles.errorTextStyle}>
+					{this.props.error}
+				</Text>
 
-				{/*<CardSection>*/}
-					{/*{this.renderButton()}*/}
-				{/*</CardSection>*/}
+				<View style={styles.formSection}>
+					{this.renderButton()}
+				</View>
 
-				{/*<TouchableOpacity*/}
-					{/*style={styles.LoginLink}*/}
-					{/*onPress={this.onLinkPress.bind(this)}>*/}
-					{/*<Text style={styles.LoginLinkText}>Login without Facebook</Text>*/}
-				{/*</TouchableOpacity>*/}
+				<TouchableOpacity
+					style={styles.LoginLink}
+					onPress={this.onLinkPress.bind(this)}>
+					<Text style={styles.LoginLinkText}>Login without Facebook</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -82,11 +82,21 @@ const styles = {
 		color: 'red'
 	},
 	formWrapper: {
-		flexDirection: 'row',
+		//flexDirection: 'column',
+		backgroundColor: 'transparent',
+		paddingLeft: 30,
+		paddingRight: 30,
+		marginTop: 30
 	},
 	formSection: {
-		flexDirection: 'row',
-		flex: 1
+		marginTop: 15
+	},
+	LoginLink: {
+		alignItems: 'center',
+		marginTop: 15
+	},
+	LoginLinkText: {
+		color: '#fff'
 	}
 };
 
