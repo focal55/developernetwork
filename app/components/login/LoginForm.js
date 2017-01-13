@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser, setLoginType } from '../../actions';
-import { Card, CardSection, Input, Button, Spinner } from '../common';
+import { Input, Button, Spinner } from '../common';
 
 class LoginForm extends Component {
 	onEmailChange(text) {
