@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { setLoginType } from '../../actions/LoginTypeAction';
-import { FacebookButton}  from '../common/FacebookButton';
+import FacebookButton from '../FacebookButton';
 import LoginForm from './LoginForm';
+import { loginUsingFacebook } from '../../services/LoginService';
 
 class LoginUi extends Component {
 
@@ -23,7 +24,7 @@ class LoginUi extends Component {
 		else {
 			return (
 				<View style={styles.container}>
-					<FacebookButton style={styles.facebookButton}/>
+					<FacebookButton style={styles.facebookButton} onPress={() => this.loginWithService(loginUsingFacebook)} />
 					<TouchableOpacity
 						style={styles.LoginLink}
 						onPress={this.onLinkPress.bind(this)}>

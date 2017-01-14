@@ -4,7 +4,6 @@
 export * from './Button';
 export * from './Card';
 export * from './CardSection';
-export * from './FacebookButton';
 export * from './Input';
 export * from './Menu';
 export * from './MenuItem';
