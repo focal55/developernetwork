@@ -12,7 +12,8 @@ const INITIAL_STATE = {
 	user: null,
 	error: '',
 	loading: false,
-	loggingIn: false
+	loggingIn: false,
+	activeItem: 'splash'
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,9 +23,10 @@ export default (state = INITIAL_STATE, action) => {
 		case PASSWORD_CHANGED:
 			return { ...state, password: action.payload };
 		case LOGIN_USER:
+			console.log("LOGIN_USER");
 			return { ...state, loggingIn: true, loading: true, error: '' };
 		case LOGIN_USER_SUCCESS:
-			return { ...state, ...INITIAL_STATE, user: action.payload };
+			return { ...state, ...INITIAL_STATE, user: action.payload, activeItem: 'developers' };
 		case LOGIN_USER_FAIL:
 			return { ...state, error: 'Authentication Failed.', password: '', loading: false, loggingIn: false };
 		default:

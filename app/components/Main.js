@@ -6,6 +6,7 @@ import Developers from './Developers';
 import Jobs from './Jobs';
 import Messages from './Messages';
 import More from './More';
+import Splash from './Splash';
 
 class _Main extends Component {
 
@@ -44,16 +45,23 @@ class _Main extends Component {
 	}
 
 	render() {
-		return (
-			<View style={styles.container}>
-				<View style={styles.contentContainer}>
-					{this.renderContent()}
+		if (this.props.activeItem == 'splash') {
+			return (
+				<Splash />
+			)
+		}
+		else {
+			return (
+				<View style={styles.container}>
+					<View style={styles.contentContainer}>
+						{this.renderContent()}
+					</View>
+					<View style={styles.menuContainer}>
+						<Menu items={this.menuItems}/>
+					</View>
 				</View>
-				<View style={styles.menuContainer}>
-					<Menu items={this.menuItems} />
-				</View>
-			</View>
-		)
+			)
+		}
 	}
 }
 

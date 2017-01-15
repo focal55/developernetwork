@@ -3,8 +3,6 @@ const {LoginManager, AccessToken} = FBSDK;
 
 export function loginWithFacebook() {
 	return new Promise((resolve, reject) => {
-		console.log("LoginWithFacebook");
-		console.log(LoginManager);
 		LoginManager.logInWithReadPermissions(['public_profile', 'email'])
 			.then(result => {
 				if (result.isCancelled) {
@@ -22,7 +20,6 @@ export function loginWithFacebook() {
 				}
 			})
 			.catch(e => {
-				console.log("here");
 				reject(e);
 			});
 	});

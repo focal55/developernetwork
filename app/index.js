@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
-import Splash from './components/Splash';
 import Main from './components/Main';
 
 class App extends Component {
@@ -15,7 +14,7 @@ class App extends Component {
 		);
 		return (
 			<Provider store={store}>
-				<Splash />
+				<Main />
 			</Provider>
 		);
 	}

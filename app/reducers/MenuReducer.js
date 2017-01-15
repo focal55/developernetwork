@@ -1,7 +1,7 @@
 import { MENU_SET_ACTIVE } from '../actions/types';
 
 const INITIAL_STATE = {
-  activeItem: 'projects'
+  activeItem: 'splash'
 };
 
 export default (state = INITIAL_STATE, action) => {
