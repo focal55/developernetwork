@@ -82,7 +82,7 @@ const mapActionsToProps = {
 
 const mapStateToProps = ({ auth, loginType }) => {
 	const { error, loading, loggingIn, user } = auth;
-	return { error, loading, loggingIn, loginType, user };
+	return { error, loading, loggingIn, loginType: loginType.loginType, user };
 };
 
 export default LoginUi = connect(mapStateToProps, mapActionsToProps)(LoginUi);
