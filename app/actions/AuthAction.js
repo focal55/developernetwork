@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { loginUsingFacebook } from '../services/LoginService';
 import { postJson } from '../network/HttpClient';
 import {
@@ -6,7 +7,8 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
 	LOGIN_USER,
-	MENU_SET_ACTIVE
+	MENU_SET_ACTIVE,
+	RESET_APP_STORAGE
 } from './types';
 
 let user_data = {};
@@ -25,6 +27,25 @@ export const passwordChanged = (text) => {
 	};
 };
 
+export const clearAsyncStorage = () => {
+	return (dispatch) => {
+		AsyncStorage.removeItem("@devnetwork")
+		.then(function() {
+			dispatch({ type: RESET_APP_STORAGE });
+		})
+		.catch(e => {
+			console.log(e);
+		});
+	};
+};
+
+export const alreadyLoggedIn = (user) => {
+	return {
+		type: LOGIN_USER_SUCCESS,
+		payload: user
+	};
+};
+
 export const loginUser = (type) => {
 	return (dispatch) => {
 		dispatch({ type: LOGIN_USER });
@@ -33,6 +54,7 @@ export const loginUser = (type) => {
 			loginUsingFacebook()
 				.then(function(fbConnectResponse) {
 					fbAccessToken = fbConnectResponse.token.accessToken;
+					user_data.fbaccesstoken = fbAccessToken;
 					// Query FB Graph for email address.
 					return fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + fbAccessToken);
 				})
@@ -49,6 +71,7 @@ export const loginUser = (type) => {
 				})
 				.then(serverResponse => {
 					serverResponse = Object.assign(serverResponse, user_data);
+					user_data = Object.assign(user_data, serverResponse);
 					return serverResponse;
 				})
 				.then(user => loginUserSuccess(dispatch, user))
@@ -65,12 +88,27 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
-	dispatch({
-		type: MENU_SET_ACTIVE,
-		payload: 'developers'
-	});
-	dispatch({
-		type: LOGIN_USER_SUCCESS,
-		payload: user
-	});
+	try {
+		let storage = {};
+		storage.email = user_data.email;
+		storage.jwt = user_data.token;
+		storage.name = user_data.name;
+		storage.fbaccesstoken = user_data.fbaccesstoken;
+		AsyncStorage.setItem('@devnetwork', JSON.stringify(storage))
+			.then(function() {
+				dispatch(
+					{
+						type: MENU_SET_ACTIVE,
+						payload: 'developers'
+					},
+					{
+						type: LOGIN_USER_SUCCESS,
+						payload: user
+					}
+				);
+			});
+	} catch (error) {
+		// Error saving data
+		console.log(error);
+	}
 };

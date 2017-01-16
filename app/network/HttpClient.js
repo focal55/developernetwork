@@ -10,7 +10,6 @@ const baseHeaders = {
 };
 
 export function setAuthToken(token: string) {
-    console.log("setAuthToken(" + token + ")");
     authToken = token;
 }
 
@@ -24,7 +23,6 @@ export function clearAuthToken() {
 
 export function get(url: string) {
     const fullUrl = endpoint + validateUrl(url);
-    console.log("GET", fullUrl);
     return fetch(fullUrl, {
         headers: getGetHeaders()
     })
@@ -34,7 +32,6 @@ export function get(url: string) {
 
 export function postDelete(url: string) {
     const fullUrl = endpoint + validateUrl(url);
-    console.log("DELETE", fullUrl);
     return fetch(fullUrl, {
         method: "delete",
         headers: getGetHeaders()
@@ -44,17 +41,12 @@ export function postDelete(url: string) {
 
 export function postJson(url: string, model: Object) {
     const fullUrl = endpoint + validateUrl(url);
-    console.log("POST", fullUrl, model);
-    console.log(JSON.stringify(model.new_payload));
-
     return fetch(fullUrl, {
         method: "post",
         headers: getPostHeaders(),
         body: JSON.stringify(model.new_payload)
     })
     .then(response => {
-        console.log("response");
-        console.log(response);
         return response;
     })
     .then(checkStatus)

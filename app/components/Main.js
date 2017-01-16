@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { AsyncStorage, Text, View } from 'react-native';
+import { setActive, alreadyLoggedIn } from '../actions';
 import { Menu } from './common';
 import Developers from './Developers';
 import Jobs from './Jobs';
@@ -19,6 +20,16 @@ class _Main extends Component {
 			'messages': {label: 'Messages', icon: 'list'},
 			'more': {label: 'More', icon: 'list'}
 		};
+	}
+
+	componentWillMount() {
+		AsyncStorage.getItem("@devnetwork").then((value) => {
+			value = JSON.parse(value);
+			if (value !== null && value.jwt !== null){
+				this.props.setActive('developers');
+				this.props.alreadyLoggedIn(value);
+			}
+		});
 	}
 
 	renderContent() {
@@ -45,22 +56,29 @@ class _Main extends Component {
 	}
 
 	render() {
-		if (this.props.activeItem == 'splash') {
+		if (this.props.loading) {
 			return (
-				<Splash />
-			)
+				<View><Text>Loading</Text></View>
+			);
 		}
 		else {
-			return (
-				<View style={styles.container}>
-					<View style={styles.contentContainer}>
-						{this.renderContent()}
+			if (this.props.activeItem == 'splash') {
+				return (
+					<Splash />
+				)
+			}
+			else {
+				return (
+					<View style={styles.container}>
+						<View style={styles.contentContainer}>
+							{this.renderContent()}
+						</View>
+						<View style={styles.menuContainer}>
+							<Menu items={this.menuItems}/>
+						</View>
 					</View>
-					<View style={styles.menuContainer}>
-						<Menu items={this.menuItems}/>
-					</View>
-				</View>
-			)
+				)
+			}
 		}
 	}
 }
@@ -78,10 +96,20 @@ const styles = {
 	}
 };
 
-const mapStateToProps = ({ menu }) => {
+const mapActionsToProps = {
+	setActive,
+	alreadyLoggedIn
+};
+
+const mapStateToProps = ({ menu, auth }) => {
+	const { error, loading, loggingIn, user } = auth;
 	return {
-		activeItem: menu.activeItem
+		activeItem: menu.activeItem,
+		error,
+		loading,
+		loggingIn,
+		user
 	}
 };
 
-export default Main = connect(mapStateToProps)(_Main);
+export default Main = connect(mapStateToProps, mapActionsToProps)(_Main);
