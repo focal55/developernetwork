@@ -2,7 +2,8 @@ import {
 	EMAIL_CHANGED,
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
-	LOGIN_USER_FAIL,
+	FB_LOGIN_USER_FAIL,
+	APP_LOGIN_USER_FAIL,
 	LOGIN_USER,
 	RESET_APP_STORAGE
 } from '../actions/types';
@@ -27,8 +28,10 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, loggingIn: true, loading: false, error: '' };
 		case LOGIN_USER_SUCCESS:
 			return { ...state, loading:false, user: action.payload, activeItem: 'developers' };
-		case LOGIN_USER_FAIL:
-			return { ...state, error: 'Authentication Failed.', password: '', loading: false, loggingIn: false };
+		case FB_LOGIN_USER_FAIL:
+			return { ...state, error: 'Facebook Login Fail, Please Try Again.', password: '', loading: false, loggingIn: false, activeItem: 'splash' };
+		case APP_LOGIN_USER_FAIL:
+			return { ...state, error: 'An Application Error Occur, Please Try Again later.', password: '', loading: false, loggingIn: false, activeItem: 'splash' };
 		case RESET_APP_STORAGE:
 			return { ...state, ...INITIAL_STATE};
 		default:

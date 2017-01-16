@@ -5,7 +5,8 @@ import {
 	EMAIL_CHANGED,
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
-	LOGIN_USER_FAIL,
+	FB_LOGIN_USER_FAIL,
+	APP_LOGIN_USER_FAIL,
 	LOGIN_USER,
 	MENU_SET_ACTIVE,
 	RESET_APP_STORAGE
@@ -61,6 +62,7 @@ export const loginUser = (type) => {
 				.then(function(response) {
 					return response.json();
 				})
+				.catch(() => fbLoginUserFail(dispatch))
 				.then(function(fbGraphResponse) {
 					// Authenticate with backend.
 					user_data = Object.assign(user_data, fbGraphResponse);
@@ -75,16 +77,18 @@ export const loginUser = (type) => {
 					return serverResponse;
 				})
 				.then(user => loginUserSuccess(dispatch, user))
-				.catch(e => {
-					console.log(e);
-				});
+				.catch(() => appLoginUserFail(dispatch));
 
 		}
 	};
 };
 
-const loginUserFail = (dispatch) => {
-	dispatch({ type: LOGIN_USER_FAIL });
+const fbLoginUserFail = (dispatch) => {
+	dispatch({ type: FB_LOGIN_USER_FAIL });
+};
+
+const appLoginUserFail = (dispatch) => {
+	dispatch({ type: APP_LOGIN_USER_FAIL });
 };
 
 const loginUserSuccess = (dispatch, user) => {

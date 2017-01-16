@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { setLoginType } from '../../actions';
+import { Spinner } from '../common/Spinner';
 import FacebookButton from '../FacebookButton';
 import LoginForm from './LoginForm';
 import { loginUsingFacebook } from '../../services/LoginService';
@@ -24,12 +25,17 @@ class LoginUi extends Component {
 		else {
 			if (this.props.loggingIn) {
 				return (
-					<View><Text>Loading...</Text></View>
+					<View style={styles.Spinner}>
+						<Spinner />
+					</View>
 				)
 			}
 			else {
 				return (
 					<View style={styles.container}>
+						<Text style={styles.ErrorTextStyle}>
+							{this.props.error}
+						</Text>
 						<FacebookButton style={styles.facebookButton} onPress={() => this.loginWithService(loginUsingFacebook)}/>
 						<TouchableOpacity
 							style={styles.LoginLink}
@@ -52,12 +58,21 @@ const styles = {
 	facebookButton: {
 		marginTop: 90
 	},
+	Spinner: {
+		marginTop: 200
+	},
 	LoginLink: {
 		marginTop: 15
 	},
 	LoginLinkText: {
 		color: '#ffffff',
 		backgroundColor:'transparent',
+	},
+	ErrorTextStyle: {
+		fontSize: 16,
+		color: 'red',
+		alignItems: 'center',
+		alignSelf: 'flex-end'
 	}
 };
 
